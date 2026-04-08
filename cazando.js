@@ -10,19 +10,19 @@ let comidaY = 0;
 //CONSTANTES
 const ALTO_GATO = 200;
 const ANCHO_GATO = 300;
+const COLOR_GATO = "red";
 const ALTO_COMIDA = 50;
 const ANCHO_COMIDA = 50;
+const COLOR_COMIDA = "black"
 
 
 // FUNCIONES
 const graficarGato = () => {
-  context.fillStyle = "red";
-  context.fillRect(gatoX, gatoY, ANCHO_GATO, ALTO_GATO);
+  graficarRectagulo(gatoX, gatoY, ANCHO_GATO, ALTO_GATO, COLOR_GATO )
 }
 
 const graficarComida = () => {
-  context.fillStyle = "black";
-  context.fillRect(comidaX, comidaY, ANCHO_COMIDA, ALTO_COMIDA);
+  graficarRectagulo(comidaX, comidaY, ANCHO_COMIDA, ALTO_COMIDA, COLOR_COMIDA);
 }
 
 const iniciarJuego = () => {
@@ -32,6 +32,12 @@ const iniciarJuego = () => {
   comidaY = 450;
   graficarGato();
   graficarComida();
+}
+
+const graficarRectagulo = (x, y, ancho, alto, color) => {
+  context.fillStyle = color;
+  context.fillRect(x, y, ancho, alto)
+  
 }
 
 
