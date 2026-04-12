@@ -49,6 +49,23 @@ const moverIzquierda = () => {
   limpiarCanva();
   graficarGato();
   graficarComida();
-
+}
+const moverDerecha = () => {
+  gatoX = gatoX + 10;
+  limpiarCanva();
+  graficarGato();
+  graficarComida();
+}
+const moverArriba = () => {
+  gatoY = gatoY - 10;
+  limpiarCanva();
+  graficarGato();
+  graficarComida();
+}
+const moverAbajo = () => {
+  gatoY = gatoY + 10;
+  limpiarCanva();
+  graficarGato();
+  graficarComida();
 }
 
