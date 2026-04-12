@@ -8,8 +8,8 @@ let comidaX = 0;
 let comidaY = 0;
 
 //CONSTANTES
-const ALTO_GATO = 50;
-const ANCHO_GATO = 75;
+const ALTO_GATO = 60;
+const ANCHO_GATO = 40;
 const COLOR_GATO = "black";
 const ALTO_COMIDA = 20;
 const ANCHO_COMIDA = 20;
@@ -49,23 +49,38 @@ const moverIzquierda = () => {
   limpiarCanva();
   graficarGato();
   graficarComida();
+  detectarColision()
 }
 const moverDerecha = () => {
   gatoX = gatoX + 10;
   limpiarCanva();
   graficarGato();
   graficarComida();
+  detectarColision()
 }
 const moverArriba = () => {
   gatoY = gatoY - 10;
   limpiarCanva();
   graficarGato();
   graficarComida();
+  detectarColision()
 }
 const moverAbajo = () => {
   gatoY = gatoY + 10;
   limpiarCanva();
   graficarGato();
   graficarComida();
+  detectarColision()
+}
+
+const detectarColision = () => {
+  if (
+    comidaX + ANCHO_COMIDA / 2 == gatoX + ANCHO_GATO
+    &&
+    comidaY + ALTO_COMIDA / 2 == gatoY + ALTO_GATO
+  ) {
+    
+    alert("RATÓN CAZADO")
+  }
 }
 
