@@ -8,14 +8,15 @@ let comidaX = 0;
 let comidaY = 0;
 let puntos = 0;
 let tiempo = 10;
-let intervalo = null;
+let intervalo = null; // para poder usar clearInterval
+let juegoActivo = false;
 
 //CONSTANTES
-const ALTO_GATO = 60;
-const ANCHO_GATO = 40;
+const ALTO_GATO = 100;
+const ANCHO_GATO = 80;
 const COLOR_GATO = "black";
-const ALTO_COMIDA = 20;
-const ANCHO_COMIDA = 20;
+const ALTO_COMIDA = 60;
+const ANCHO_COMIDA = 60;
 const COLOR_COMIDA = "red"
 
 
@@ -29,6 +30,7 @@ const graficarComida = () => {
 }
 
 const iniciarJuego = () => {
+  juegoActivo = true
   intervalo = setInterval(restarTiempo, 1000)
   gatoX = canvas.width/2 - ANCHO_GATO/2;
   gatoY = canvas.height/2 - ALTO_GATO/2;
@@ -36,7 +38,37 @@ const iniciarJuego = () => {
   comidaY = canvas.height - ALTO_COMIDA;
   graficarGato();
   graficarComida();
+  actualizarPantalla();
 }
+
+const reiniciarJuego = () => {
+  juegoActivo = true; 
+  clearInterval(intervalo);
+  intervalo = setInterval(restarTiempo, 1000);
+  tiempo = 10;
+  mostrarEnSpan("tiempo", tiempo);
+  puntos = 0;
+  mostrarEnSpan("puntos", puntos);
+  gatoX = canvas.width / 2 - ANCHO_GATO / 2;
+  gatoY = canvas.height / 2 - ALTO_GATO / 2;
+  comidaX = canvas.width - ANCHO_COMIDA;
+  comidaY = canvas.height - ALTO_COMIDA;
+  graficarGato();
+  graficarComida();
+  actualizarPantalla()
+};
+
+const detenerJuego = () => {
+  juegoActivo = false;
+  clearInterval(intervalo);
+  tiempo = 10;
+  mostrarEnSpan("tiempo", tiempo);
+  puntos = 0;
+  mostrarEnSpan("puntos", puntos);
+  graficarGato();
+  graficarComida();
+  actualizarPantalla()
+};
 
 const graficarRectagulo = (x, y, ancho, alto, color) => {
   context.fillStyle = color;
@@ -76,6 +108,11 @@ const actualizarPantalla = () => {
 }
 
 const detectarColision = () => {
+  if (juegoActivo == false) {
+    return
+  }
+
+
   if (
     gatoX + ANCHO_GATO > comidaX &&
     gatoX < comidaX + ANCHO_COMIDA &&
@@ -87,6 +124,17 @@ const detectarColision = () => {
     posicionAleatoriaComida();
     puntos = puntos + 1;
     mostrarEnSpan("puntos", puntos)
+    tiempo = 10;
+
+    if (puntos == 6) {
+      juegoActivo = false
+      puntos = 6;
+      mostrarEnSpan("puntos", puntos);
+      alert("GANASTE!!!")
+      clearInterval(intervalo)
+      tiempo = 10;
+      mostrarEnSpan("tiempo", tiempo)
+    }
   }
 }
 
@@ -102,7 +150,8 @@ const restarTiempo = () => {
 
   if (tiempo == 0) {
     clearInterval(intervalo);
-    alert("Se acabó el tiempo")
+    alert("PERDISTE - SE ACABÓ EL TIEMPO")
+    reiniciarJuego()
 
   }
 

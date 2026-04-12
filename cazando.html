@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Juego Cazando</title>
   <link rel="stylesheet" href="cazando.css">
 
 </head>
-<body onload="iniciarJuego()">
+<body>
 
-  <h1>Juego Cazando</h1>
+  <h1>El Juego del Gato</h1>
   <p>Autor: LopSig Dev</p>
+
+  <div>
+    <h2>Instrucciones:</h2>
+    <p>
+      <strong>
+       - Pulsa el botón "Iniciar Juego" para comenzar <br>
+      </strong>
+      - Caza 6 veces al ratón para ganar el juego <br>
+      - Pulsa los botones ⬆, ⬇, ⬅, ➡ para mover al gato <br>
+      - Pierdes si se acaba el tiempo y el juego se reinicia automaticamente <br>
+      - Puedes reiniciar el juego cuando quieras <br>
+      - Pulsa "Detener" para acabar el juego
+    </p>
+  </div>
+
+  <div>
+    <button onclick="iniciarJuego()">Iniciar Juego</button>
+  </div>
   
   <!-- CANVAS -->
   <canvas id="areaJuego" width="500" height="500"></canvas>
@@ -26,6 +45,13 @@
   <div class="panel">
     <span>Puntos: <span id="puntos">0</span></span>
     <span>Tiempo: <span id="tiempo">10</span></span>
+  </div>
+
+  <div>
+    <button onclick="reiniciarJuego()">REINICIAR</button>
+  </div>
+  <div>
+    <button onclick="detenerJuego()">DETENER</button>
   </div>
 
   <p id="mensaje"></p>
