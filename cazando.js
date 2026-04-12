@@ -6,6 +6,7 @@ let gatoX = 0;
 let gatoY = 0;
 let comidaX = 0;
 let comidaY = 0;
+let puntos = 0;
 
 //CONSTANTES
 const ALTO_GATO = 60;
@@ -46,41 +47,49 @@ const limpiarCanva = () => {
 
 const moverIzquierda = () => {
   gatoX = gatoX - 10;
-  limpiarCanva();
-  graficarGato();
-  graficarComida();
+  actualizarPantalla()
   detectarColision()
 }
 const moverDerecha = () => {
   gatoX = gatoX + 10;
-  limpiarCanva();
-  graficarGato();
-  graficarComida();
+  actualizarPantalla()
   detectarColision()
 }
 const moverArriba = () => {
   gatoY = gatoY - 10;
-  limpiarCanva();
-  graficarGato();
-  graficarComida();
+  actualizarPantalla()
   detectarColision()
 }
 const moverAbajo = () => {
   gatoY = gatoY + 10;
-  limpiarCanva();
-  graficarGato();
-  graficarComida();
+  actualizarPantalla()
   detectarColision()
+}
+
+const actualizarPantalla = () => {
+  limpiarCanva()
+  graficarGato()
+  graficarComida()
 }
 
 const detectarColision = () => {
   if (
-    comidaX + ANCHO_COMIDA / 2 == gatoX + ANCHO_GATO
-    &&
-    comidaY + ALTO_COMIDA / 2 == gatoY + ALTO_GATO
+    gatoX + ANCHO_GATO > comidaX &&
+    gatoX < comidaX + ANCHO_COMIDA &&
+    gatoY + ALTO_GATO > comidaY &&
+    gatoY < comidaY + ALTO_COMIDA
   ) {
-    
-    alert("RATÓN CAZADO")
+    alert("RATÓN CAZADO");
+
+    posicionAleatoriaComida();
+    puntos = puntos + 1;
+    mostrarEnSpan("puntos", puntos)
   }
+}
+
+const posicionAleatoriaComida = () => {
+  comidaX = generarAleatorio(0, canvas.width - ANCHO_COMIDA);
+  comidaY = generarAleatorio(0, canvas.height - ALTO_COMIDA)
+  actualizarPantalla()
 }
 
