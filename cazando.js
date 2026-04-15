@@ -14,7 +14,7 @@ let juegoActivo = false;
 //CONSTANTES
 const ALTO_GATO = 100;
 const ANCHO_GATO = 80;
-const COLOR_GATO = "black";
+const COLOR_GATO = "yellow";
 const ALTO_COMIDA = 60;
 const ANCHO_COMIDA = 60;
 const COLOR_COMIDA = "red"
@@ -31,7 +31,12 @@ const graficarComida = () => {
 
 const iniciarJuego = () => {
   juegoActivo = true
+  clearInterval(intervalo);
   intervalo = setInterval(restarTiempo, 1000)
+  tiempo = 10;
+  mostrarEnSpan("tiempo", tiempo);
+  puntos = 0;
+  mostrarEnSpan("puntos", puntos);
   gatoX = canvas.width/2 - ANCHO_GATO/2;
   gatoY = canvas.height/2 - ALTO_GATO/2;
   comidaX = canvas.width - ANCHO_COMIDA;
@@ -119,16 +124,15 @@ const detectarColision = () => {
     gatoY + ALTO_GATO > comidaY &&
     gatoY < comidaY + ALTO_COMIDA
   ) {
-    alert("RATÓN CAZADO");
+    
 
     posicionAleatoriaComida();
     puntos = puntos + 1;
     mostrarEnSpan("puntos", puntos)
     tiempo = 10;
 
-    if (puntos == 6) {
+    if (puntos == 7) {
       juegoActivo = false
-      puntos = 6;
       mostrarEnSpan("puntos", puntos);
       alert("GANASTE!!!")
       clearInterval(intervalo)

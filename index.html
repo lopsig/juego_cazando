@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Juego del Gato</title>
+  <link rel="stylesheet" href="cazando.css">
+</head>
+
+<body>
+  <div class="contenedor">
+
+    <h1>🐱 El Juego del Gato</h1>
+    <p class="autor">por LopSig Dev</p>
+
+    <div class="instrucciones">
+      <h2>¿Cómo jugar?</h2>
+      <p>
+        <strong>Pulsa "Iniciar Juego" para comenzar</strong><br>
+        Caza 7 veces al ratón para ganar 🐭<br>
+        Usa ⬆ ⬇ ⬅ ➡ para mover al gato<br>
+        Pierdes si se acaba el tiempo — ¡el juego se reinicia solo!<br>
+        Puedes reiniciar o detener cuando quieras
+      </p>
+    </div>
+
+    <div class="boton-iniciar">
+      <button onclick="iniciarJuego()">▶ Iniciar Juego</button>
+    </div>
+
+    <canvas id="areaJuego" width="500" height="500"></canvas>
+
+    <div class="panel">
+      <span>🐭 Puntos: <span id="puntos">0</span></span>
+      <span>⏱ Tiempo: <span id="tiempo">10</span></span>
+    </div>
+
+    <div class="controles">
+      <button onclick="moverArriba()">⬆</button>
+      <br>
+      <button onclick="moverIzquierda()">⬅</button>
+      <button onclick="moverAbajo()">⬇</button>
+      <button onclick="moverDerecha()">➡</button>
+    </div>
+
+    <div class="acciones">
+      <button class="btn-reiniciar" onclick="reiniciarJuego()">🔄 Reiniciar</button>
+      <button class="btn-detener" onclick="detenerJuego()">⏹ Detener</button>
+    </div>
+
+    <p id="mensaje"></p>
+
+  </div>
+
+  <script src="cazando.js"></script>
+  <script src="utils.js"></script>
+</body>
+
+</html>
