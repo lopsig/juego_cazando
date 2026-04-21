@@ -7,7 +7,7 @@ let gatoY = 0;
 let comidaX = 0;
 let comidaY = 0;
 let puntos = 0;
-let tiempo = 10;
+let tiempo = 15;
 let intervalo = null; // para poder usar clearInterval
 let juegoActivo = false;
 
@@ -33,7 +33,7 @@ const iniciarJuego = () => {
   juegoActivo = true
   clearInterval(intervalo);
   intervalo = setInterval(restarTiempo, 1000)
-  tiempo = 10;
+  tiempo = 15;
   mostrarEnSpan("tiempo", tiempo);
   puntos = 0;
   mostrarEnSpan("puntos", puntos);
@@ -50,7 +50,7 @@ const reiniciarJuego = () => {
   juegoActivo = true; 
   clearInterval(intervalo);
   intervalo = setInterval(restarTiempo, 1000);
-  tiempo = 10;
+  tiempo = 15;
   mostrarEnSpan("tiempo", tiempo);
   puntos = 0;
   mostrarEnSpan("puntos", puntos);
@@ -66,7 +66,7 @@ const reiniciarJuego = () => {
 const detenerJuego = () => {
   juegoActivo = false;
   clearInterval(intervalo);
-  tiempo = 10;
+  tiempo = 15;
   mostrarEnSpan("tiempo", tiempo);
   puntos = 0;
   mostrarEnSpan("puntos", puntos);
@@ -129,14 +129,14 @@ const detectarColision = () => {
     posicionAleatoriaComida();
     puntos = puntos + 1;
     mostrarEnSpan("puntos", puntos)
-    tiempo = 10;
+    tiempo = 15;
 
     if (puntos == 7) {
       juegoActivo = false
       mostrarEnSpan("puntos", puntos);
       alert("GANASTE!!!")
       clearInterval(intervalo)
-      tiempo = 10;
+      tiempo = 15;
       mostrarEnSpan("tiempo", tiempo)
     }
   }
@@ -161,3 +161,37 @@ const restarTiempo = () => {
 
 }
 
+
+
+//MOVER CON FLECHAS
+window.addEventListener("keydown", (event) => {
+  
+  if (!juegoActivo) return;
+
+  switch (event.key) {
+    case "ArrowUp":
+    case "w":
+    case "W":
+      moverArriba();
+      break;
+    case "ArrowDown":
+    case "s":
+    case "S":
+      moverAbajo();
+      break;
+    case "ArrowLeft":
+    case "a":
+    case "A":
+      moverIzquierda();
+      break;
+    case "ArrowRight":
+    case "d":
+    case "D":
+      moverDerecha();
+      break;
+  }
+  
+  if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(event.key)) {
+      event.preventDefault();
+  }
+});
