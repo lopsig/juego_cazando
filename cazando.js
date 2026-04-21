@@ -32,7 +32,7 @@ const graficarComida = () => {
 const iniciarJuego = () => {
   juegoActivo = true
   clearInterval(intervalo);
-  intervalo = setInterval(restarTiempo, 1000)
+  intervalo = setInterval(restarTiempo, 1500)
   tiempo = 15;
   mostrarEnSpan("tiempo", tiempo);
   puntos = 0;
@@ -49,7 +49,7 @@ const iniciarJuego = () => {
 const reiniciarJuego = () => {
   juegoActivo = true; 
   clearInterval(intervalo);
-  intervalo = setInterval(restarTiempo, 1000);
+  intervalo = setInterval(restarTiempo, 1500);
   tiempo = 15;
   mostrarEnSpan("tiempo", tiempo);
   puntos = 0;
@@ -129,7 +129,14 @@ const detectarColision = () => {
     posicionAleatoriaComida();
     puntos = puntos + 1;
     mostrarEnSpan("puntos", puntos)
-    tiempo = 15;
+    tiempo
+    tiempo = tiempo - 1
+    mostrarEnSpan(mostrarEnSpan("tiempo", tiempo));
+    if (tiempo == 0) {
+      clearInterval(intervalo);
+      alert("PERDISTE - SE ACABÓ EL TIEMPO");
+      reiniciarJuego();
+    }
 
     if (puntos == 7) {
       juegoActivo = false
