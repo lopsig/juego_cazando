@@ -8,6 +8,15 @@ imagenGato.onload = () => {
   imagenCargada = true;
 };
 
+const imagenRaton = new Image();
+imagenRaton.src =
+  "https://toppng.com/uploads/preview/mouse-animal-icon-icon-115535080243i70qdlohw.png";
+let imagenRatonCargada = false;
+
+imagenRaton.onload = () => {
+  imagenRatonCargada = true;
+};
+
 let canvas = document.getElementById("areaJuego");
 let context = canvas.getContext("2d");
 
@@ -34,7 +43,7 @@ const COLOR_COMIDA = "red";
 //   graficarRectagulo(gatoX, gatoY, ANCHO_GATO, ALTO_GATO, COLOR_GATO);
 // };
 
-// NUEVA FUNCION
+// NUEVA FUNCION PARA GATO POR IA
 const graficarGato = () => {
   if (imagenCargada) {
     context.drawImage(imagenGato, gatoX, gatoY, ANCHO_GATO, ALTO_GATO);
@@ -45,8 +54,23 @@ const graficarGato = () => {
 };
 
 
+// const graficarComida = () => {
+//   graficarRectagulo(comidaX, comidaY, ANCHO_COMIDA, ALTO_COMIDA, COLOR_COMIDA);
+// };
+
+//NUEVA FUNCION PARA COMIDA POR IA
 const graficarComida = () => {
-  graficarRectagulo(comidaX, comidaY, ANCHO_COMIDA, ALTO_COMIDA, COLOR_COMIDA);
+  if (imagenRatonCargada) {
+    context.drawImage(imagenRaton, comidaX, comidaY, ANCHO_COMIDA, ALTO_COMIDA);
+  } else {
+    graficarRectagulo(
+      comidaX,
+      comidaY,
+      ANCHO_COMIDA,
+      ALTO_COMIDA,
+      COLOR_COMIDA,
+    );
+  }
 };
 
 const iniciarJuego = () => {
